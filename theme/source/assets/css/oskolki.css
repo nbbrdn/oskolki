@@ -1,0 +1,215 @@
+/*
+ * Oskolki — Source fork overrides
+ *
+ * Design goals:
+ * - linear research-journal feed;
+ * - small thumbnails, including on mobile;
+ * - long-form reading first;
+ * - feature image is a feed thumbnail by default, not a post hero;
+ * - keep upstream Source CSS untouched where possible.
+ */
+
+/* Feed */
+.gh-container.is-list .gh-card-link {
+    align-items: flex-start;
+    gap: 22px;
+}
+
+.gh-container.is-list .gh-card-image {
+    width: 180px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--color-lighter-gray);
+}
+
+.gh-container.is-list .gh-card:not(.no-image) .gh-card-wrapper {
+    max-width: 680px;
+}
+
+.gh-container.is-list .gh-card-tag {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--ghost-accent-color);
+}
+
+.gh-container.is-list .gh-card-title {
+    --factor: 1;
+    font-size: 2rem;
+    line-height: 1.28;
+}
+
+.gh-container.is-list .gh-card-excerpt {
+    margin-top: 7px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: var(--color-secondary-text);
+    -webkit-line-clamp: 3;
+}
+
+/* Long-form post */
+.post-template .gh-article {
+    --content-width: 760px;
+    --container-width: 1080px;
+}
+
+.post-template .gh-article-header {
+    margin-top: clamp(36px, 4vw, 64px);
+    margin-bottom: 34px;
+}
+
+.post-template .gh-article-title {
+    max-width: 900px;
+    font-size: clamp(3rem, 1.2vw + 2.5rem, 4rem);
+    line-height: 1.14;
+}
+
+.post-template .gh-article-excerpt {
+    max-width: 760px;
+}
+
+.post-template .gh-content {
+    --content-font-size: 1.8rem;
+    line-height: 1.72;
+}
+
+.post-template .gh-content figcaption {
+    margin-top: 8px;
+    font-size: 1.3rem;
+    line-height: 1.45;
+    color: var(--color-secondary-text);
+}
+
+.post-template .gh-content .kg-image-card img,
+.post-template .gh-content .kg-gallery-image img {
+    border-radius: 2px;
+}
+
+/* Comments are a separate visual block, regardless of comments engine. */
+.post-template .gh-comments {
+    margin-top: 64px;
+    padding-top: 36px;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Keep thumbnails small on phones; Source normally makes them full width. */
+@media (max-width: 767px) {
+    .gh-container.is-list .gh-card-link {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .gh-container.is-list .gh-card-image {
+        width: 112px;
+        aspect-ratio: 4 / 3;
+    }
+
+    .gh-container.is-list .gh-card-title {
+        font-size: 1.75rem;
+        line-height: 1.28;
+    }
+
+    .gh-container.is-list .gh-card-excerpt {
+        font-size: 1.4rem;
+        line-height: 1.45;
+        -webkit-line-clamp: 2;
+    }
+
+    .gh-container.is-list .gh-card-tag {
+        display: none;
+    }
+
+    .gh-container.is-list .gh-card-meta:not(:empty) {
+        margin-top: 6px;
+    }
+
+    .post-template .gh-content {
+        --content-font-size: 1.7rem;
+        line-height: 1.68;
+    }
+}
+
+@media (max-width: 520px) {
+    .gh-container.is-list .gh-card-image {
+        width: 96px;
+    }
+
+    .gh-container.is-list .gh-card-excerpt {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+ * Header branding
+ * ----------------------------------------------------------------------- */
+
+.oskolki-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+    max-width: none;
+    white-space: nowrap;
+}
+
+.oskolki-brand .oskolki-brand-logo {
+    width: 42px;
+    height: 42px;
+    max-width: 42px;
+    max-height: 42px;
+    object-fit: contain;
+    flex: 0 0 42px;
+}
+
+.oskolki-brand-title {
+    display: inline-block;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+ * Minimal footer
+ * ----------------------------------------------------------------------- */
+
+.oskolki-footer {
+    margin-top: 72px;
+    padding: 0;
+    background: transparent;
+}
+
+.oskolki-footer-inner {
+    display: block;
+    padding-top: 26px;
+    padding-bottom: 28px;
+    border-top: 1px solid var(--color-border);
+}
+
+.oskolki-footer-copyright {
+    text-align: center;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--color-secondary-text);
+}
+
+@media (max-width: 767px) {
+    .oskolki-brand {
+        gap: 9px;
+    }
+
+    .oskolki-brand .oskolki-brand-logo {
+        width: 36px;
+        height: 36px;
+        max-width: 36px;
+        max-height: 36px;
+        flex-basis: 36px;
+    }
+
+    .oskolki-brand-title {
+        font-size: 1.75rem;
+    }
+
+    .oskolki-footer {
+        margin-top: 52px;
+    }
+}

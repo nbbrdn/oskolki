@@ -1,0 +1,12 @@
+{{!--
+    Single extension point for comments.
+
+    The stock implementation uses Ghost native comments. If we later switch
+    to Remark42, Isso, Giscus or another engine, only this partial needs to
+    change.
+--}}
+{{#if comments}}
+    <section class="gh-comments gh-canvas" id="comments" aria-label="Comments">
+        {{comments}}
+    </section>
+{{/if}}

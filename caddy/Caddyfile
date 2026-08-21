@@ -1,0 +1,24 @@
+www.oskolkicelogo.ru {
+    redir https://oskolkicelogo.ru{uri} permanent
+}
+
+oskolkicelogo.ru {
+    encode zstd gzip
+    
+    # Remark42
+    handle_path /remark42* {
+        reverse_proxy remark42:8080 {
+            header_up X-Real-IP {remote_host}
+        }
+    }
+
+    # Все остальное - Ghost
+    handle {
+        reverse_proxy ghost:2368
+    }
+}
+
+tree.oskolkicelogo.ru {
+    encode zstd gzip
+    reverse_proxy grampsweb:5000
+}
