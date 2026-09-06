@@ -15,7 +15,6 @@ services:
       - caddy_config:/config
     depends_on:
       - ghost
-      - grampsweb
       - remark42
 
   mysql:
@@ -60,59 +59,6 @@ services:
       mysql:
         condition: service_healthy
 
-
-  grampsweb:
-    image: ghcr.io/gramps-project/grampsweb:latest
-    restart: unless-stopped
-
-    environment: &gramps_environment
-      GRAMPSWEB_TREE: "Bayborodin"
-      GRAMPSWEB_BASE_URL: "https://tree.oskolkicelogo.ru"
-
-      GRAMPSWEB_REGISTRATION_DISABLED: "true"
-      GRAMPSWEB_DISABLE_TELEMETRY: "true"
-
-      GUNICORN_NUM_WORKERS: "2"
-
-      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb_redis:6379/0"
-      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb_redis:6379/0"
-      GRAMPSWEB_RATELIMIT_STORAGE_URI: "redis://grampsweb_redis:6379/1"
-
-    volumes: &gramps_volumes
-      - gramps_users:/app/users
-      - gramps_index:/app/indexdir
-      - gramps_thumb_cache:/app/thumbnail_cache
-      - gramps_cache:/app/cache
-      - gramps_secret:/app/secret
-      - gramps_db:/root/.gramps/grampsdb
-      - gramps_media:/app/media
-      - gramps_tmp:/tmp
-
-    depends_on:
-      - grampsweb_redis
-
-
-  grampsweb_celery:
-    image: ghcr.io/gramps-project/grampsweb:latest
-    restart: unless-stopped
-
-    environment:
-      <<: *gramps_environment
-
-    volumes:
-      *gramps_volumes
-
-    depends_on:
-      - grampsweb_redis
-
-    command:
-      celery -A gramps_webapi.celery worker --loglevel=INFO --concurrency=1
-
-
-  grampsweb_redis:
-    image: valkey/valkey:8-alpine
-    restart: unless-stopped
-
   remark42:
     image: ghcr.io/umputun/remark42:latest
     container_name: remark42
@@ -154,15 +100,6 @@ volumes:
   ghost_content:
 
   remark42_data:
-
-  gramps_users:
-  gramps_index:
-  gramps_thumb_cache:
-  gramps_cache:
-  gramps_secret:
-  gramps_db:
-  gramps_media:
-  gramps_tmp:
 
 networks:
   default:

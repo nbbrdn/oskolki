@@ -1,0 +1,33 @@
+services:
+
+  # В локальной разработке Caddy не запускаем.
+  # Если понадобится проверить конфигурацию Caddy,
+  # его можно запустить явно через профиль production.
+  caddy:
+    profiles:
+      - production
+
+  ghost:
+    environment:
+      NODE_ENV: development
+      url: http://localhost:2368
+
+    ports:
+      - "2368:2368"
+
+    # Исходники нашей темы лежат прямо на ПК.
+    # При изменении файлов Ghost сразу видит изменения.
+    volumes:
+      - ./theme/source:/var/lib/ghost/content/themes/source
+
+  remark42:
+    container_name: remark42-dev
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      REMARK_URL: "http://localhost:8080"
+
+      # Для локальной разработки
+      AUTH_SAME_SITE: "lax"
