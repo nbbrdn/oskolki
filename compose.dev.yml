@@ -18,7 +18,7 @@ services:
     # Исходники нашей темы лежат прямо на ПК.
     # При изменении файлов Ghost сразу видит изменения.
     volumes:
-      - ./theme/source:/var/lib/ghost/content/themes/source
+      - ./theme/oskolki:/var/lib/ghost/content/themes/oskolki
 
   remark42:
     container_name: remark42-dev
@@ -28,6 +28,5 @@ services:
 
     environment:
       REMARK_URL: "http://localhost:8080"
-
-      # Для локальной разработки
       AUTH_SAME_SITE: "lax"
+      ALLOWED_HOSTS: "'self',http://localhost:2368"

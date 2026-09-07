@@ -1,6 +1,6 @@
 {
-    "name": "oskolki-source",
-    "description": "A long-form genealogy research journal theme based on Ghost Source",
+    "name": "oskolki",
+    "description": "Custom Ghost theme for Осколки целого",
     "version": "0.1.0",
     "engines": {
         "ghost": ">=5.0.0",

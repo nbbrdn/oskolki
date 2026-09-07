@@ -1,0 +1,31 @@
+<section class="gh-comments gh-canvas" id="comments" aria-label="Комментарии">
+    <div id="remark42"></div>
+</section>
+
+<script>
+    (function () {
+        const isDev =
+            window.location.hostname === "localhost" &&
+            window.location.port === "2368";
+
+        window.remark_config = {
+            host: isDev
+                ? "http://localhost:8080"
+                : window.location.origin + "/remark42",
+
+            site_id: "oskolkicelogo",
+            locale: "ru",
+            components: ["embed"],
+            no_footer: true,
+            show_rss_subscription: false
+        };
+
+        const script = document.createElement("script");
+        script.type = "module";
+        script.async = true;
+        script.defer = true;
+        script.src = window.remark_config.host + "/web/embed.mjs";
+
+        (document.head || document.body).appendChild(script);
+    })();
+</script>
