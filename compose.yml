@@ -107,6 +107,8 @@ services:
 
       # Администраторы Remark42
       ADMIN_SHARED_ID: "${REMARK42_ADMIN_ID}"
+      NOTIFY_ADMINS: "telegram"
+      NOTIFY_TELEGRAM_CHAN: "${REMARK42_TELEGRAM_CHAT_ID}"
 
     volumes:
       - remark42_data:/srv/var
