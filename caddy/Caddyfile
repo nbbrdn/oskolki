@@ -17,8 +17,3 @@ oskolkicelogo.ru {
         reverse_proxy ghost:2368
     }
 }
-
-tree.oskolkicelogo.ru {
-    encode zstd gzip
-    reverse_proxy grampsweb:5000
-}
