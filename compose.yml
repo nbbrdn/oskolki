@@ -96,6 +96,14 @@ services:
         remark42,
         oskolkicelogo.ru
 
+      # Telegram authentication
+      AUTH_TELEGRAM: "true"
+      TELEGRAM_TOKEN: "${REMARK42_TELEGRAM_TOKEN}"
+
+      # Пользователь сможет подписываться
+      # на ответы на свои комментарии
+      NOTIFY_USERS: "telegram"
+
     volumes:
       - remark42_data:/srv/var
 
