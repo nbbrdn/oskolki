@@ -105,6 +105,9 @@ services:
       # на ответы на свои комментарии
       NOTIFY_USERS: "telegram"
 
+      # Администраторы Remark42
+      ADMIN_SHARED_ID: "${REMARK42_ADMIN_ID}"
+
     volumes:
       - remark42_data:/srv/var
 
