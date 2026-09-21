@@ -54,6 +54,7 @@ services:
 
     volumes:
       - ghost_content:/var/lib/ghost/content
+      - ./theme/oskolki:/var/lib/ghost/content/themes/oskolki:ro
 
     depends_on:
       mysql:
